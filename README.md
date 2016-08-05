@@ -72,6 +72,7 @@ export default App;
 // index.js
 import React from 'react';
 import { render } from 'react-dom';
+import App from './compositionRoot';
 
 render(<App value={0} />, document.getElementById('app'));
 

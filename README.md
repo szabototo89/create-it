@@ -1,7 +1,7 @@
 create-it
 =========
 
-Simple component creation library which helps to apply pure DI in your projects. 
+Simple component creation library helps to apply pure DI in your projects. Designed for React.js. 
 
 ## create-it <3 React.js
 

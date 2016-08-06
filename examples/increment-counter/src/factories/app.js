@@ -7,7 +7,7 @@ const app = ({ Container, Status, Increment }) => class extends React.Component 
     const { value } = this.props;
     this.handleIncrement = this.handleIncrement.bind(this);
 
-    this.state = {
+    this.state = { 
       value
     };
   }

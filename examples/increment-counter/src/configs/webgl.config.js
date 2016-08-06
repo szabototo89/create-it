@@ -1,15 +1,17 @@
-import app from '../factories/app';
-import status from '../factories/status';
-import increment from '../factories/increment';
+import configure from './configure';
 
-import Container from '../components/webgl/container';
 import Button from '../components/webgl/button';
+import Container from '../components/webgl/container';
 import Text from '../components/webgl/text';
 
-const NullComponent = () => null;
+// import app from '../factories/app';
+// import status from '../factories/status';
+// import increment from '../factories/increment';
 
-const Increment = increment({ Button });
-const Status = status({ Text });
-const App = app({ Container, Status, Increment });
+// const Increment = increment({ Button });
+// const Status = status({ Text });
+// const App = app({ Container, Status, Increment });
 
-export default App;
+// export default App;
+
+export default configure({ Button, Container, Text });

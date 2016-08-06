@@ -1,8 +1,3 @@
-/**
- * 
- * 
- * @param {any} condition
- */
 const filter = (condition) => (middleware) => {
   return (factory, originalFactory, ...rest) => {
     return condition(originalFactory)

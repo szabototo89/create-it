@@ -20,6 +20,11 @@ class Container extends React.Component {
     requestAnimationFrame(this.animate);
   }
 
+  componentWilUnmount() {
+    this.stage && this.stage.destroy();
+    this.renderer && this.renderer.destroy();
+  }
+
   animate() {
     this.renderer.render(this.stage);
     requestAnimationFrame(this.animate);

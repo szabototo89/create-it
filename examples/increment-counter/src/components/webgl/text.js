@@ -1,5 +1,6 @@
 import React from 'react';
 import pixi from 'pixi';
+import { createText, destroyObject } from '../../utils/pixiHelpers'; 
 
 class Text extends React.Component {
   getText() {
@@ -11,16 +12,17 @@ class Text extends React.Component {
     const { children } = this.props;
     const { stage } = this.context;
 
-    this.pixiText = new pixi.Text(this.getText(), {
-      font: '32px sans-serif',
-      fill: 'white'
+    this.pixiText = createText({
+      value: this.getText(),
+      fontSize: 32,
+      fontFamily: 'sans-serif'
     });
 
     stage.addChild(this.pixiText);
   }
 
-  componentDidUnmount() {
-    this.pixiText && this.pixiText.destroy();
+  componentWillUnmount() {
+    destroyObject(this.pixiText);
   }
 
   render() {

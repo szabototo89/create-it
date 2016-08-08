@@ -81,8 +81,10 @@ const app = ({ Container, MyForm }) => ({ value }) => {
 };
 
 export default app;
-
+```
+```js
 // composition-root.js
+
 // Constructing component object graph
 
 // importing dependencies
@@ -106,7 +108,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from 'composition-root';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App value={Date.now()} />, document.getElementById('app'));
 ```
 
 Can you see the difference? Managed to save flexibility and it's explicit. Code changing is not significant (but there is some) and we can avoid import statements at all in factories (`MyForm` and `App`) which implies it's totally safe when a file has been renamed or moved into different folder. All you need to do just change the path in one place in the code. 
@@ -114,7 +116,7 @@ Can you see the difference? Managed to save flexibility and it's explicit. Code 
 I believe this a simple pattern, easy to refactor existing components and it can be applied to any React Component. Because of dependency injection it provides a new way for scaling your application even further. 
 
 ```jsx
-const MyForm = ({ Container, Label, DateTimePicker }) => class MyForm {
+const myForm = ({ Container, Label, DateTimePicker }) => class MyForm {
   render() {
     const { value, label } = this.props;
 
@@ -126,7 +128,7 @@ const MyForm = ({ Container, Label, DateTimePicker }) => class MyForm {
 };
 
 // OR
-const MyForm = ({ Container, Label, DateTimePicker }) => React.createClass({
+const myForm = ({ Container, Label, DateTimePicker }) => React.createClass({
   render() {
     const { value, label } = this.props;
 
@@ -141,6 +143,36 @@ const MyForm = ({ Container, Label, DateTimePicker }) => React.createClass({
 ## Putting Component Factories into React.js ecosystem
 
 [TODO: displayName, propTypes etc.]
+
+## Road to create-it.js
+
+Alright, we know what **Component Factories** are exactly how we can use. Let's get started to play with these ideas and release its true nature. Take a look to this example:
+
+```js
+const MyForm = myForm({ Container, Label, DateTimePicker }); 
+const App = app({ Container, MyForm });
+```
+
+By introducing a new constructor function we can hide actual instantiation from the user.
+
+```js
+const create = (...dependencies) => (factory) => factory(...dependencies);
+
+const MyForm = create({ Container, Label, DateTimePicker })(myForm);
+const App = create({ Container, MyForm })(app);
+```
+
+What has been changed? We're passing dependencies as the first and factory as the second parameter. Its benefit is that we can remove code duplications where factories reuse the same dependencies:
+
+```js
+const create = (...dependencies) => (factory) => factory(...dependencies);
+
+const createWithActualComponents = (components, ...dependencies) => 
+                                   create({ Container, Label, DateTimePicker, ...components }, ...dependencies);
+
+const MyForm = createWithActualComponents()(myForm);
+const App = createWithActualComponents({ MyForm })(app);
+``` 
 
 ## Middlewares
 

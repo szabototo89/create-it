@@ -43,7 +43,7 @@ const App = ({ value }) => {
 
 Let's assume our application renders a customized `Form` (let's call it `MyForm`) and takes two properties. `MyForm` is a stateless component and it renders a `Label` and a `DateTimePicker` (this comes from a 3rd party library) within a `Container`. These guys are coming from external files.
 
-* **Note**: in this example I use absolute paths for accessing modules.*
+**Note**: in this example I use absolute paths for accessing modules.
 
 First challenge could be a refactoring when a new DateTimePicker (eg. provides new functionality) needs to be tried out. In the worst case we have to iterate through on every component which uses the previous DateTimePicker and change it to the new one. If it has been abstracted away it is enough to go to DateTimePicker abstraction and change its current implementation to the latest one.   
 

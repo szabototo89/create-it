@@ -1,7 +1,7 @@
 export function createBox({ width, height, position, onClick } = {}) {
   const box = new PIXI.Graphics();
   box.beginFill(0xFF9933);
-  box.drawRect(0, 0, width, height);
+  box.drawRect(0, 0, +width, +height);
   box.endFill();
 
   box.interactive = !!onClick;
@@ -16,7 +16,7 @@ export function createBox({ width, height, position, onClick } = {}) {
 
 export function createText({ value = '', fontSize = 32, fontFamily = 'sans serif', position, onClick } = {}) {
   const text = new PIXI.Text(value, {
-    font: `${fontSize}px ${fontFamily}`,
+    font: `${+fontSize}px ${fontFamily}`,
     fill: 'white'
   });
 

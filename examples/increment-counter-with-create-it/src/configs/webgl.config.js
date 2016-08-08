@@ -1,17 +1,19 @@
 import configure from './configure';
 
-import Button from '../components/webgl/button';
-import Container from '../components/webgl/container';
-import Text from '../components/webgl/text';
+import button from '../factories/webgl/button';
+import container from '../factories/webgl/container';
+import text from '../factories/webgl/text';
 
-// import app from '../factories/app';
-// import status from '../factories/status';
-// import increment from '../factories/increment';
+import { createContainer } from '../utils/pixiHelpers';
 
-// const Increment = increment({ Button });
-// const Status = status({ Text });
-// const App = app({ Container, Status, Increment });
+const createIt = (middlewares = []) => (...dependencies) => (factory) => factory(...dependencies);
+const create = createIt();
 
-// export default App;
+const renderer = PIXI.autoDetectRenderer(800, 600);
+const stage = createContainer();
+
+const Button = create({ stage })(button);
+const Text = create({ stage })(text);
+const Container = create({ stage, renderer })(container);
 
 export default configure({ Button, Container, Text });

@@ -1,10 +1,8 @@
 import React from 'react';
 import { createBox, createText, createContainer } from '../../utils/pixiHelpers';
 
-class Button extends React.Component {
+const button = ({ stage }) => class Button extends React.Component {
   componentDidMount() {
-    const { stage } = this.context;
-
     const content = React.Children.toArray(this.props.children).join("");
 
     const position = { x: 0, y: 50 };
@@ -38,8 +36,4 @@ class Button extends React.Component {
   }
 }
 
-Button.contextTypes = {
-  stage: React.PropTypes.object
-};
-
-export default Button;
+export default button;

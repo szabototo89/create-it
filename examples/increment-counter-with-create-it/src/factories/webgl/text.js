@@ -1,7 +1,7 @@
 import React from 'react';
 import { createText, destroyObject } from '../../utils/pixiHelpers'; 
 
-class Text extends React.Component {
+const text = ({ stage }) => class Text extends React.Component {
   getText() {
     const { children } = this.props;
     return React.Children.toArray(children).join("");
@@ -9,7 +9,6 @@ class Text extends React.Component {
 
   componentDidMount() {
     const { children } = this.props;
-    const { stage } = this.context;
 
     this.pixiText = createText({
       value: this.getText(),
@@ -35,8 +34,4 @@ class Text extends React.Component {
   }
 }
 
-Text.contextTypes = {
-  stage: React.PropTypes.object
-};
-
-export default Text;
+export default text;

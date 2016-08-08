@@ -58,14 +58,14 @@ Not surprisingly Component Factories are coming to help us. Instead of defining 
 
 // MyForm is a React Component Factory
 // It takes one object literal as parameter which contains actual Container, Label and DateTimePicker components and returns the current component implementation
-const MyForm = ({ Container, Label, DateTimePicker }) => () => {
+const myForm = ({ Container, Label, DateTimePicker }) => ({ label, value }) => {
   return <Container>
-    <Label>Expiration date </Label>
-    <DateTimePicker />
+    <Label>{label}</Label>
+    <DateTimePicker value={value} />
   </Container>;
 };
 
-export default MyForm;
+export default myForm;
 ```
 
 The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments. `MyForm` is a factory from now, which means TODO: continue
@@ -74,11 +74,13 @@ The first significant change is there are no import statements because `MyForm` 
 // app.js
 
 // No import statements
-const App = ({ Container, MyForm }) => () => {
+const app = ({ Container, MyForm }) => ({ value }) => {
   return <Container>
-    <MyForm />
+    <MyForm value={value} label="Expiration date" />
   </Container>
 };
+
+export default app;
 
 // composition-root.js
 // Constructing component object graph
@@ -89,22 +91,22 @@ import Label from 'components/label';
 import DateTimePicker from '3rd/dateTimePicker';
 
 // importing factories
-import App from 'components/app';
-import MyForm from 'components/myForm';
+import app from 'factories/app';
+import myForm from 'factories/myForm';
 
 // constructing actual React components by calling factories
-const ActualMyForm = MyForm({ Container, Label, DateTimePicker }); 
-const ActualApp = App({ Container, ActualMyForm });
+const MyForm = myForm({ Container, Label, DateTimePicker }); 
+const App = app({ Container, MyForm });
 
-// use this ActualApp in ReactDOM.render method
-export default ActualApp;
+// use this App in ReactDOM.render method
+export default App;
 
 // index.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ActualApp from 'composition-root';
+import App from 'composition-root';
 
-ReactDOM.render(<ActualApp />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 ```
 
 Can you see the difference? Managed to save flexibility and it's explicit. Code changing is not significant (but there is some) and we can avoid import statements at all in factories (`MyForm` and `App`) which implies it's totally safe when a file has been renamed or moved into different folder. All you need to do just change the path in one place in the code. 
@@ -114,9 +116,11 @@ I believe this a simple pattern, easy to refactor existing components and it can
 ```jsx
 const MyForm = ({ Container, Label, DateTimePicker }) => class MyForm {
   render() {
+    const { value, label } = this.props;
+
     return <Container>
-      <Label>Expiration date </Label>
-      <DateTimePicker />
+      <Label>{label}</Label>
+      <DateTimePicker value={value} />
     </Container>;
   }
 };
@@ -124,9 +128,11 @@ const MyForm = ({ Container, Label, DateTimePicker }) => class MyForm {
 // OR
 const MyForm = ({ Container, Label, DateTimePicker }) => React.createClass({
   render() {
+    const { value, label } = this.props;
+
     return <Container>
-      <Label>Expiration date </Label>
-      <DateTimePicker />
+      <Label>{label}</Label>
+      <DateTimePicker value={value} />
     </Container>;
   }
 });

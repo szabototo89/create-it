@@ -3,7 +3,7 @@ import configure from './configure';
 import button from '../factories/webgl/button';
 import container from '../factories/webgl/container';
 import text from '../factories/webgl/text';
-import createIt from './createIt';
+import { createIt } from '../create-it';
 
 import { createContainer } from '../utils/pixiHelpers';
 

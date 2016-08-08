@@ -1,5 +1,5 @@
 import React from 'react';
-import { createBox, createText, createContainer } from '../../utils/pixiHelpers';
+import { createBox, createText, createContainer, destroyObject } from '../../utils/pixiHelpers';
 
 const button = ({ stage }) => class Button extends React.Component {
   componentDidMount() {

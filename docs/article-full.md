@@ -142,11 +142,21 @@ const myForm = ({ Container, Label, DateTimePicker }) => React.createClass({
 
 ## Putting Component Factories into React.js ecosystem
 
+Component factories are coming to help us when we want a quick way to change component implementations, but how they fit into the React.js ecosystem? Not surprisingly we can still use React features such as prop/context types or display names, but it requires a little tooling. Several options have been provided for users and it needs to be decided which style will be used in the applications.
+
+### Classic way
+
+[TODO: finish]
+
+### Functional way
+
+[TODO: finish]
+
 [TODO: displayName, propTypes etc.]
 
 ## Road to create-it.js
 
-Alright, we know what **Component Factories** are exactly how we can use. Let's get started to play with these ideas and release its true nature. Take a look to this example:
+Alright, we know what **Component Factories** are and how we can use. Let's get started to play with these concepts and release its true nature. Take a look to this example:
 
 ```js
 const MyForm = myForm({ Container, Label, DateTimePicker }); 
@@ -172,9 +182,11 @@ const actualComponents = { Container, Label, DateTimePicker };
 const createWithActualComponents = (components, ...dependencies) => 
                                    create({ ...actualComponents, ...components }, ...dependencies);
 
-const MyForm = createWithActualComponents()(myForm);
-const App = createWithActualComponents({ MyForm })(app);
+const MyForm = createWithActualComponents()(myForm); // passing Container, Label and DateTimePicker
+const App = createWithActualComponents({ MyForm })(app); // passing Container, Label and DateTimePicker
 ``` 
+
+All actual components have been passed, but it's not a big deal, because we're just passing references and destructuring feature hides what other components have been passed to the factories. So it's a good practice to store *leaf components* (*actual components*) in an object and merge with other dependencies at every instantiation.
 
 ## Middlewares
 

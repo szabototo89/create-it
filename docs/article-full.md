@@ -1,7 +1,7 @@
 Component Factories in React.js
 ===============================
 
-I've been thinking about for a long time how the dependencies could be manageable efficiently and how we cwhy don't we consider components as volatile dependencies? After a little experimenting managed to get along with **Component Factories** which fits perfectly into the React ecosystem. 
+I've been thinking about for a long time how the dependencies could be manageable efficiently and why don't we consider components as volatile dependencies? After a little experimenting managed to get along with **Component Factories** which fits perfectly into the React ecosystem. 
 
 ## Problem
 
@@ -195,9 +195,9 @@ export default ({ Container, Label, DateTimePicker }) => {
 
 ### Classical or functional?
 
-Well... it depends on your coding style. Classical way is easier, it doesn't require more learning or 3rd party library support (if you don't want to reinvent the wheel), meanwhile functional way fits perfectly into the functional programming and reduces(?) the boilerplate code. At first I'd stay with classical and if code starts to stink then I'd switch to functional. 
+Well... it depends on your coding style. Classical way is easier, it doesn't require more learning or 3rd party library support (if you don't want to reinvent the wheel), meanwhile functional way fits perfectly into the functional programming and reduces(?) the boilerplate code. At first I'd stay with classical and if code starts to stink then just switch to functional. 
 
-### Higher-order components (such as React-Redux `connect()`)
+### Higher-order components (such as `connect()` in React-Redux)
 
 Higher-order components are not different from actual components they can be wrapped into another factory anytime. The most commonly used HOC is `connect()` function in React-Redux library. When creating a container with `connect` function we can wrap it into this form:
 

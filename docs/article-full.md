@@ -116,7 +116,7 @@ Can you see the difference? Managed to save flexibility and it's explicit. Code 
 I believe this a simple pattern, easy to refactor existing components and it can be applied to any React Component. Because of dependency injection it provides a new way for scaling your application even further. 
 
 ```jsx
-const myForm = ({ Container, Label, DateTimePicker }) => class MyForm {
+const myForm = ({ Container, Label, DateTimePicker }) => class MyForm extends React.Component {
   render() {
     const { value, label } = this.props;
 
@@ -128,6 +128,7 @@ const myForm = ({ Container, Label, DateTimePicker }) => class MyForm {
 };
 
 // OR
+
 const myForm = ({ Container, Label, DateTimePicker }) => React.createClass({
   render() {
     const { value, label } = this.props;
@@ -144,15 +145,75 @@ const myForm = ({ Container, Label, DateTimePicker }) => React.createClass({
 
 Component factories are coming to help us when we want a quick way to change component implementations, but how they fit into the React.js ecosystem? Not surprisingly we can still use React features such as prop/context types or display names, but it requires a little tooling. Several options have been provided for users and it needs to be decided which style will be used in the applications.
 
-### Classic way
+### Classical way
 
-[TODO: finish]
+Classical or traditional way is to use prop types in the original form. For instance myForm is defined such like this:
+
+```js
+const myForm = ({ Container, Label, DateTimePicker }) => {
+  const MyForm = ({ label, value }) => <Container>
+    <Label>{label}</Label>
+    <DateTimePicker value={value} />
+  </Container>;
+
+  MyForm.propTypes = {
+    label: React.PropTypes.string.required,
+    value: React.PropTypes.object.required
+  };
+
+  return MyForm;
+};
+
+export default myForm;
+```
+
+So nothing has been changed, component factory just wraps the whole actual component into a function. It's readable, doesn't require any 3rd party library and no need to learn new ways. There is no more boilerplate code. The only downside is `myForm` and `MyForm` that might be little confusing to the newcomers, so this style might be more readable: 
+
+```js
+import React from 'react';
+
+export default ({ Container, Label, DateTimePicker }) => {
+  const MyForm = ({ label, value }) => <Container>
+    <Label>{label}</Label>
+    <DateTimePicker value={value} />
+  </Container>;
+
+  MyForm.propTypes = {
+    label: React.PropTypes.string.required,
+    value: React.PropTypes.object.required
+  };
+
+  return MyForm;
+};  
+```
+
+**Note**: By using static properties (`static propTypes = {...}`) in the classes we could return a class expression too.
 
 ### Functional way
 
-[TODO: finish]
+[TODO: propTypes, displayName]
 
-[TODO: displayName, propTypes etc.]
+### Classical or functional?
+
+Well... it depends on your coding style. Classical way is easier, it doesn't require more learning or 3rd party library support (if you don't want to reinvent the wheel), meanwhile functional way fits perfectly into the functional programming and reduces(?) the boilerplate code. At first I'd stay with classical and if code starts to stink then I'd switch to functional. 
+
+### Higher-order components (such as React-Redux `connect()`)
+
+Higher-order components are not different from actual components they can be wrapped into another factory anytime. The most commonly used HOC is `connect()` function in React-Redux library. When creating a container with `connect` function we can wrap it into this form:
+
+```js
+import React from 'react';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => ...;
+const mapDispatchToProps = (dispatch) => ...;
+
+export default (ActualComponent) => connect(mapStateToProps, mapDispatchToProps)(ActualComponent);
+// this is the same:
+// export default connect(mapStateToProps, mapDispatchToProps);
+```
+
+There is a chance that `ActualComponent` has a factory as well but from our perspective we don't care where `ActualComponent` comes from.  
 
 ## Road to create-it.js
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const app = ({ Container, Status, Increment }) => class extends React.Component {
+const app = ({ Container, Status, Increment }) => class App extends React.Component {
   constructor(props) {
     super(props);
 

@@ -8,6 +8,6 @@ const configure = ({ Button, Container, Text }) => {
   const App = app({ Container, Status, Increment });
 
   return App;
-}
+};
 
 export default configure;

@@ -167,8 +167,10 @@ What has been changed? We're passing dependencies as the first and factory as th
 ```js
 const create = (...dependencies) => (factory) => factory(...dependencies);
 
+const actualComponents = { Container, Label, DateTimePicker };
+
 const createWithActualComponents = (components, ...dependencies) => 
-                                   create({ Container, Label, DateTimePicker, ...components }, ...dependencies);
+                                   create({ ...actualComponents, ...components }, ...dependencies);
 
 const MyForm = createWithActualComponents()(myForm);
 const App = createWithActualComponents({ MyForm })(app);

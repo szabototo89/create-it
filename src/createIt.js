@@ -4,7 +4,7 @@
  * @param {Function} factory
  * @param {Array} dependencies
  */
-export const defaultCtor = (factory, dependencies) => factory(...dependencies);
+export const defaultResolver = (factory, dependencies) => factory(...dependencies);
 
 /**
  * create function is a factory produces a pure DI container to instantiate actual components with it.
@@ -14,21 +14,21 @@ export const defaultCtor = (factory, dependencies) => factory(...dependencies);
  * import { app, mainContent, sideBar } from 'factories';
  * import { Paragraph, Menu } from 'components';
  * 
- * const createIt = create();
+ * const create = createIt();
  * 
- * const MainContent = createIt({ Paragraph })(mainContent);
- * const SideBar = createIt({ Menu })(sideBar);
- * const App = createIt({ SideBar, MainContent })(app);
+ * const MainContent = create({ Paragraph })(mainContent);
+ * const SideBar = create({ Menu })(sideBar);
+ * const App = create({ SideBar, MainContent })(app);
  * 
  * @param {Array} middlewares: 
- * @param {any} { ctor = defaultCtor }
+ * @param {any} { resolver = defaultresolver }
  * @returns Function
  */
-const createIt = (middlewares = [], { ctor = defaultCtor }) => {
-  return (...dependencies) => (originalFactory) => ctor(middlewares.reduce(
-    (actualFactory, middleware) => middleware(actualFactory, originalFactory, ctor), 
+const createIt = (middlewares = [], { resolver = defaultResolver }) => {
+  return (...dependencies) => (originalFactory) => resolver(middlewares.reduce(
+    (actualFactory, middleware) => middleware(actualFactory, originalFactory, resolver), 
     originalFactory
   ), dependencies);
 };
 
-export default createIt;
+export default createIt; 

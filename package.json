@@ -10,7 +10,7 @@
     "start": "webpack --config webpack.config.dev.js",
     "dev": "npm run start -- --progress --colors",
     "dev:watch": "npm run dev -- --watch",
-    "test": "karma start"
+    "test": "karma start --single-run"
   },
   "dependencies": {
     "chai": "^3.5.0",

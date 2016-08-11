@@ -1,13 +1,15 @@
 import createIt from './createIt';
-import bindTo from './bindTo';
 import autoAppend from './middlewares/autoAppend';
 import createMiddleware from './middlewares/createMiddleware';
 import filter from './middlewares/filter';
+import concat from './concat';
+import merge from './merge';
 
 export default {
   createIt,
   autoAppend,
   createMiddleware,
   filter,
-  bindTo
+  concat, 
+  merge
 };

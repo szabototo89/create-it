@@ -11,9 +11,25 @@ module.exports = function (config) {
     frameworks: ["jasmine"],
 
     preprocessors: {
-      "test/**/*.js": ["webpack"]
+      "test/**/*.js": ["babel","webpack"]
     },
 
-    webpack: webpackConfig
+    webpack: Object.assign({}, webpackConfig, {
+      entry: null
+    }),
+
+    babel: {
+      options: {
+        presets: ['es2015'],
+        plugins: ["transform-object-rest-spread"],
+        sourceMap: 'inline'
+      },
+      filename: function (file) {
+        return file.originalPath;
+      },
+      sourceFileName: function (file) {
+        return file.originalPath;
+      }
+    }
   });
 };

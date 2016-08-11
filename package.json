@@ -10,10 +10,12 @@
     "start": "webpack --config webpack.config.dev.js",
     "dev": "npm run start -- --progress --colors",
     "dev:watch": "npm run dev -- --watch",
-    "test": "karma start --single-run"
+    "test": "karma start --single-run",
+    "test:watch": "karma start"
   },
   "dependencies": {
     "chai": "^3.5.0",
+    "expect": "^1.20.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   },
@@ -29,6 +31,7 @@
     "chai": "^3.5.0",
     "jasmine-core": "^2.4.1",
     "karma": "^1.2.0",
+    "karma-babel-preprocessor": "^6.0.1",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.1",

@@ -1,7 +1,12 @@
-import chai from 'chai';
+import createIt from '../src/createIt';
+import expect from 'expect';
 
-describe('hello', () => {
-  it('hello world', () => {
-    
+describe('createIt() function', () => {
+  it('should return a function when nothing has been passed', () => {
+    // act
+    const result = createIt();
+
+    // assert
+    expect(result).isTrue(Function)
   });
 });

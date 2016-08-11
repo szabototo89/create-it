@@ -1,6 +1,8 @@
 create-it
 =========
 
+[![Build Status](https://travis-ci.org/szabototo89/create-it.svg?branch=master)](https://travis-ci.org/szabototo89/create-it)
+
 Simple component creation library helps to apply pure DI in your projects. Designed for React.js. 
 
 ## create-it <3 React.js

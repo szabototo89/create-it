@@ -249,6 +249,10 @@ const App = createWithActualComponents({ MyForm })(app); // passing Container, L
 
 All actual components have been passed, but it's not a big deal, because we're just passing references and destructuring feature hides what other components have been passed to the factories. So it's a good practice to store *leaf components* (*actual components*) in an object and merge with other dependencies at every instantiation.
 
+## Component factories vs. Higher-order components
+
+You might be realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use anything else. That explains the similarity between them.  
+
 ## Middlewares
 
 [TODO]

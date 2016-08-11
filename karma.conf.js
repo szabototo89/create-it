@@ -1,12 +1,14 @@
 var webpackConfig = require('./webpack.config.dev.js')
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
+    browsers: ["Chrome"],
+
     files: [
       { pattern: "test/**/*.js" }
     ],
 
-    frameworks: ['jasmine'],
+    frameworks: ["jasmine"],
 
     preprocessors: {
       "test/**/*.js": ["webpack"]

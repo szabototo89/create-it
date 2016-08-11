@@ -13,5 +13,5 @@ before_script:
   - npm install -g webpack
 
 script:
-  - npm run test
+  - npm test
   - npm start

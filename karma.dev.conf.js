@@ -5,7 +5,7 @@ module.exports = function (config) {
     browsers: ["Chrome"],
 
     files: [
-      { pattern: "test/**/*.js" }
+      'test/**/*.js',
     ],
 
     frameworks: ["jasmine"],
@@ -20,7 +20,7 @@ module.exports = function (config) {
 
     babel: {
       options: {
-        presets: ['es2015'],
+        presets: ['es2015', 'babel-polyfill'],
         plugins: ["transform-object-rest-spread"],
         sourceMap: 'inline'
       },

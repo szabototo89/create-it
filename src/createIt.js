@@ -24,7 +24,7 @@ export const defaultResolver = (factory, dependencies) => factory(...dependencie
  * @param {any} { resolver = defaultresolver }
  * @returns Function
  */
-const createIt = (middlewares = [], { resolver = defaultResolver }) => {
+const createIt = (middlewares = [], { resolver = defaultResolver } = {}) => {
   return (...dependencies) => (originalFactory) => resolver(middlewares.reduce(
     (actualFactory, middleware) => middleware(actualFactory, originalFactory, resolver), 
     originalFactory

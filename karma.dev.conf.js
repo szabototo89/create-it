@@ -2,7 +2,7 @@ var webpackConfig = require('./webpack.config.dev.js')
 
 module.exports = function (config) {
   config.set({
-    browsers: ["PhantomJS"],
+    browsers: ["Chrome"],
 
     files: [
       { pattern: "test/**/*.js" }

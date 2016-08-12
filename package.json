@@ -10,17 +10,14 @@
     "start": "webpack --config webpack.config.dev.js",
     "dev": "npm run start -- --progress --colors",
     "dev:watch": "npm run dev -- --watch",
-    "test": "karma start --single-run",
-    "test:watch": "karma start"
+    "test": "karma start karma.build.conf.js",
+    "test:watch": "karma start karma.dev.conf.js"
   },
   "dependencies": {
     "chai": "^3.5.0",
     "expect": "^1.20.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",

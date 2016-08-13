@@ -68,7 +68,7 @@ const myForm = ({ Container, Label, DateTimePicker }) => ({ label, value }) => {
 export default myForm;
 ```
 
-The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments and it has been renamed to `myForm`, because it is a factory from now. Without importing any components they need to be defined somehow and it seems defining a higher-order component is the most straightforward to us. `myForm` receives these components in the first parameter as an object literal. Thanks to ES6 destructuring language feature we're extracting only the necessary components. Please be advised that their usage hasn't been changed. 
+The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments and it has been renamed to `myForm`, because it is a factory from now. Without importing any components we need to define in the parameter list after wrapping it into a new function. However React handles component creation on its own we need more control over them. That is the reason why it's been implemented as Higher-order components. `myForm` receives these components in the first parameter as an object literal. Thanks to ES6 destructuring language feature we're extracting only the necessary components. Please be advised that their usage hasn't been changed. 
 
 Let's do this refactoring with `App` component as well.
 

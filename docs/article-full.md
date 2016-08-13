@@ -43,7 +43,7 @@ const App = ({ value }) => {
 
 Let's assume our application renders a customized `Form` (let's call it `MyForm`) and takes two properties. `MyForm` is a stateless component and it renders a `Label` and a `DateTimePicker` (this comes from a 3rd party library) within a `Container`. These guys are coming from external files.
 
-**Note**: in this example I use absolute paths for accessing modules.
+_**Note**: in this example I use absolute paths for accessing modules._
 
 First challenge could be a refactoring when a new DateTimePicker (eg. provides new functionality) needs to be tried out. In the worst case we have to iterate through on every component which uses the previous DateTimePicker and change it to the new one. If it has been abstracted away it is enough to go to DateTimePicker abstraction and change its current implementation to the latest one.   
 
@@ -68,7 +68,9 @@ const myForm = ({ Container, Label, DateTimePicker }) => ({ label, value }) => {
 export default myForm;
 ```
 
-The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments. `MyForm` is a factory from now, which means TODO: continue
+The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments and it has been renamed to `myForm`, because it is a factory from now. Without importing any components they need to be defined somehow and it seems defining a higher-order component is the most straightforward to us. `myForm` receives these components in the first parameter as an object literal. Thanks to ES6 destructuring language feature we're extracting only the necessary components. Please be advised that their usage hasn't been changed. 
+
+Let's do this refactoring with `App` component as well.
 
 ```jsx
 // app.js
@@ -82,6 +84,9 @@ const app = ({ Container, MyForm }) => ({ value }) => {
 
 export default app;
 ```
+
+
+
 ```js
 // composition-root.js
 

@@ -5,8 +5,9 @@ module.exports = {
 
   output: {
     path: __dirname + "/build",
-    filename: "build.js"
+    filename: "create-it.js"
   },
+  
   module: {
     loaders: [
       { test: /\.jsx?$/, exclude: 'node_modules', loader: 'babel' }

@@ -1,15 +1,15 @@
-import createIt from './createIt';
-import autoAppend from './middlewares/autoAppend';
-import createMiddleware from './middlewares/createMiddleware';
-import filter from './middlewares/filter';
-import concat from './concat';
-import merge from './merge';
+import _createIt from './createIt';
+import _autoAppend from './middlewares/autoAppend';
+import _createMiddleware from './middlewares/createMiddleware';
+import _filter from './middlewares/filter';
+import _concat from './concat';
+import _merge from './merge';
 
-export default {
-  createIt,
-  autoAppend,
-  createMiddleware,
-  filter,
-  concat, 
-  merge
-};
+export const createIt = _createIt;
+export const autoAppend = _autoAppend;
+export const createMiddleware = _createMiddleware;
+export const filter = _filter;
+export const concat = _concat;
+export const merge = _merge;
+
+export default createIt;

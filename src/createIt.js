@@ -31,4 +31,4 @@ const createIt = (middlewares = [], { resolver = defaultResolver } = {}) => {
   ), dependencies);
 };
 
-export default createIt; 
+export default createIt;  

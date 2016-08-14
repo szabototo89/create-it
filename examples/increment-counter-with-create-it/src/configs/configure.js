@@ -2,7 +2,7 @@ import app from '../factories/app';
 import status from '../factories/status';
 import increment from '../factories/increment';
 
-import { createIt } from '../create-it';
+import createIt from 'create-it';
 
 const configure = ({ Button, Container, Text }) => {
   const create = (actualComponents, ...dependencies) => createIt()({ 

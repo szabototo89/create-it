@@ -1,6 +1,6 @@
 {
   "presets": [ 
-    [ "es2015", { "modules": "commonjs" } ] 
+    [ "es2015"/*, { "modules": "commonjs" }*/ ] 
   ],
-  "plugins": ["transform-object-rest-spread"]
+  "plugins": ["transform-object-rest-spread", "transform-es2015-modules-commonjs"]
 }

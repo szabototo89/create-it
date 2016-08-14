@@ -1,1 +1,0 @@
-export const createIt = () => (...dependencies) => factory => factory(...dependencies);

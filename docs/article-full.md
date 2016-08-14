@@ -238,7 +238,11 @@ const MyForm = create({ Container, Label, DateTimePicker })(myForm);
 const App = create({ Container, MyForm })(app);
 ```
 
-What has been changed? We're passing dependencies as the first and factory as the second parameter. Its benefit is that we can remove code duplications where factories reuse the same dependencies:
+What has been changed? We're passing dependencies as the first and factory as the second parameter. Its benefit is that we can remove code duplications where factories reuse the same dependencies.
+
+### Merging dependencies
+
+Firstly we can merge dependencies which reduces code duplications in our code: 
 
 ```js
 const create = (...dependencies) => (factory) => factory(...dependencies);
@@ -274,7 +278,19 @@ const createWithActualComponents = merge(actualComponents)(create);
 const MyForm = createWithActualComponents({ DateTimePicker: SuperiorDateTimePicker })(myForm);
 ```
 
-## Component factories vs. Higher-order components
+### Concatenating dependencies 
+
+You can use this technique not just for merging but concatenating too. For instance you want to pass a logger to any components as last parameter:
+
+```js
+const appendLogger = (logger) => (create) => (...dependencies) => create(...dependencies, logger);
+const logger = (message) => console.log(`[LOG] ${message}`);
+const createWithLogger = appendLogger(logger)(create);
+
+const MyForm = createWithLogger();
+```
+
+## Component factories vs. Higher-order Components
 
 You might be realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use anything else. That explains the similarity between them.  
 

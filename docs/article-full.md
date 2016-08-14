@@ -43,7 +43,7 @@ const App = ({ value }) => {
 
 Let's assume our application renders a customized `Form` (let's call it `MyForm`) and takes two properties. `MyForm` is a stateless component and it renders a `Label` and a `DateTimePicker` (this comes from a 3rd party library) within a `Container`. These guys are coming from external files.
 
-**Note**: in this example I use absolute paths for accessing modules.
+_**Note**: in this example I use absolute paths for accessing modules._
 
 First challenge could be a refactoring when a new DateTimePicker (eg. provides new functionality) needs to be tried out. In the worst case we have to iterate through on every component which uses the previous DateTimePicker and change it to the new one. If it has been abstracted away it is enough to go to DateTimePicker abstraction and change its current implementation to the latest one.   
 
@@ -68,7 +68,9 @@ const myForm = ({ Container, Label, DateTimePicker }) => ({ label, value }) => {
 export default myForm;
 ```
 
-The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments. `MyForm` is a factory from now, which means TODO: continue
+The first significant change is there are no import statements because `MyForm` receives dependencies as function arguments and it has been renamed to `myForm`, because it is a factory from now. Without importing any components we need to define in the parameter list after wrapping it into a new function. However React handles component creation on its own we need more control over them. That is the reason why it's been implemented as Higher-order components. `myForm` receives these components in the first parameter as an object literal. Thanks to ES6 destructuring language feature we're extracting only the necessary components. Please be advised that their usage hasn't been changed. 
+
+Let's do this refactoring with `App` component as well.
 
 ```jsx
 // app.js
@@ -82,6 +84,9 @@ const app = ({ Container, MyForm }) => ({ value }) => {
 
 export default app;
 ```
+
+
+
 ```js
 // composition-root.js
 
@@ -248,6 +253,26 @@ const App = createWithActualComponents({ MyForm })(app); // passing Container, L
 ``` 
 
 All actual components have been passed, but it's not a big deal, because we're just passing references and destructuring feature hides what other components have been passed to the factories. So it's a good practice to store *leaf components* (*actual components*) in an object and merge with other dependencies at every instantiation.
+
+We can go further and generalize this pattern by introducing `merge()` function:
+
+```js
+const create = (...dependencies) => (factory) => factory(...dependencies);
+const actualComponents = { Container, Label, DateTimePicker };
+
+const createWithActualComponents = merge(actualComponents)(create);
+``` 
+
+If you're interested in `merge` implementation you can find it [https://github.com/szabototo89/create-it/blob/master/src/merge.js](here). Be advised that you can override the default actual components anytime:
+
+```js
+const create = (...dependencies) => (factory) => factory(...dependencies);
+const actualComponents = { Container, Label, DateTimePicker };
+const createWithActualComponents = merge(actualComponents)(create);
+
+// Overriding DateTimePicker with SuperiorDateTimePicker
+const MyForm = createWithActualComponents({ DateTimePicker: SuperiorDateTimePicker })(myForm);
+```
 
 ## Component factories vs. Higher-order components
 

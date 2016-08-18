@@ -1,7 +1,7 @@
 import app from '../factories/app';
 import status from '../factories/status';
 import increment from '../factories/increment';
-
+debugger;
 import createIt from 'create-it';
 
 const configure = ({ Button, Container, Text }) => {

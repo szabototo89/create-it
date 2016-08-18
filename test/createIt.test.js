@@ -1,5 +1,5 @@
 // import createIt from '../src/createIt';
-import createIt, * as v from '../build/create-it';
+import createIt from '../build/createIt';
 import expect from 'expect';
 
 describe('createIt() function', () => {

@@ -1,16 +1,22 @@
-module.exports = {
-  entry: "./src/index.js",
+module.exports = (function () {
+  const libraryName = 'createIt';
 
-  devtool: 'inline-source-map',
+  return {
+    entry: "./src/index.js",
 
-  output: {
-    path: __dirname + "/build",
-    filename: "create-it.js"
-  },
-  
-  module: {
-    loaders: [
-      { test: /\.jsx?$/, exclude: 'node_modules', loader: 'babel' }
-    ]
-  }
-};
+    devtool: 'inline-source-map',
+
+    output: {
+      path: __dirname + "/build",
+      library: libraryName,
+      libraryTarget: 'umd',
+      filename: libraryName + '.js'
+    },
+
+    module: {
+      loaders: [
+        { test: /\.jsx?$/, exclude: 'node_modules', loader: 'babel' }
+      ]
+    }
+  };
+})();

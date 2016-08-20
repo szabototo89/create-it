@@ -5,8 +5,8 @@
  * @returns
  */
 const createMiddleware = (func) => {
-  return (factory, _, resolver) => (...dependencies) => {
-    const component = resolver(factory, dependencies);
+  return (factory, _, ctor) => (...dependencies) => {
+    const component = ctor(factory, dependencies);
     return func(component) || component;
   };
 };

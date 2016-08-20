@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './configs/dom.config';
+import App from './configs/webgl.config';
 
 ReactDOM.render(
   <App value={0} />,

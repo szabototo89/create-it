@@ -1,4 +1,4 @@
-create.js API Reference
+create-it.js API Reference
 =====================================
 
 ## `createIt()`
@@ -36,4 +36,28 @@ const App = create({
 })(app);
 ```
 
-## `placeholder()`
+## `placeholder(text: string): React.Component`
+
+Returns a simple text as React Component.  
+
+### Arguments
+
+  1) `text` _(string)_: The text for component content.  
+
+### Returns
+
+Returns a simple text content wrapped into `<div />` HTML elements. 
+
+### Example
+
+```js
+import { placeholder } from 'create-it/factories';
+import button from './factories/button';
+import app from './factories/app';
+
+const Button = create()(button);
+const App = create({ 
+  Button, 
+  Sidebar: placeholder('Sidebar - under development') // Sidebar is not implemented yet 
+})(app);
+```

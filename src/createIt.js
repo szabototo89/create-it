@@ -4,7 +4,7 @@
  * @param {Function} factory
  * @param {Array} dependencies
  */
-export const defaultResolver = (factory, dependencies) => factory(...dependencies);
+export const defaultCtor = (factory, dependencies) => factory(...dependencies);
 
 /**
  * create function is a factory produces a pure DI container to instantiate actual components with it.
@@ -24,9 +24,9 @@ export const defaultResolver = (factory, dependencies) => factory(...dependencie
  * @param {any} { resolver = defaultresolver }
  * @returns Function
  */
-const createIt = (middlewares = [], { resolver = defaultResolver } = {}) => {
-  return (...dependencies) => (originalFactory) => resolver(middlewares.reduce(
-    (actualFactory, middleware) => middleware(actualFactory, originalFactory, resolver), 
+const createIt = (middlewares = [], { ctor = defaultCtor } = {}) => {
+  return (...dependencies) => (originalFactory) => ctor(middlewares.reduce(
+    (actualFactory, middleware) => middleware(actualFactory, originalFactory, ctor), 
     originalFactory
   ), dependencies);
 };

@@ -3,13 +3,13 @@ create-it.js API Reference
 
 ## `createIt()`
 
-## `concat([actualDependencies]: Array, [options]: Object)(create: CreateFunction): CreateFunction`
+## `concat(...actualDependencies: Array<any>, [options]: Object)(create: CreateFunction): CreateFunction`
 
 Returns a new `create` function with appended/prepended actual dependencies. It helps for reducing code duplications in dependency configurations. 
 
 ### Arguments
 
-  - `actualDependencies` _(Array)_ **[optional]**: Actual dependencies for components. These will be added for every components. 
+  - `actualDependencies` _(any)_: Actual dependencies for components. These will be added for every components. 
   - `options` _(Object)_ **[optional]**: Specifies more options for constructing components. 
     - `isAppending` _(Boolean)_ **[optional, default value = true]**: Whether it is true actual dependencies will be appended to end of the dependencies otherwise will be prepended to the beginning.  
 
@@ -19,9 +19,75 @@ Returns a new `create` function for constructing new components.
 
 ### Example
 
-[TODO]
+```js
+// ------------------------
+// configure.js
+// ------------------------
 
-## `merge()`
+import React from 'react';
+import createIt, { concat } from 'create-it';
+import button from './factories/button';
+import application from './factories/application';
+
+const createBase = createIt();
+
+// passing React as dependency to every component in the last parameter
+const create = concat(React)(createBase);
+
+const Button = create()(button);
+const Application = create({ Button })(application);
+
+export default Application;
+
+// ------------------------
+// factories/application.js
+// ------------------------
+
+// no need to import React, because Stateless Component gets it as a dependency.
+export default ({ Button }, React) => ({ label, onClick }) => 
+  <Button label={label} onClick={onClick} />;
+
+// ------------------------
+// factories/button.js
+// ------------------------
+
+// only dependency is the React library
+export default (React) => ({ label, onClick }) => 
+  <button onClick={onClick}>{label}</button>;
+```
+
+## `merge(...actualDependencies: Array<Object>)(create: CreateFunction): CreateFunction`
+
+Returns a new `create` function and it merges actual dependencies to the new dependencies. 
+
+### Arguments
+
+- `actualDependencies` _(any)_: Actual dependencies for components. These will be added for every components.
+
+### Returns
+
+Returns a new `create` function for constructing new components.
+
+### Example
+
+```js
+import React from 'react';
+import createIt, { merge } from 'create-it';
+
+import Container from './components/container';
+import Button from './components/button';
+
+import incrementer from './factories/incrementer';
+import application from './factories/application';
+
+const create = merge({ Button, Container })(createIt());
+
+const Incrementer = create(/*{ Button, Container }*/)(incrementer);
+const Application = create({ Incrementer /*, Button, Container */ })(application);
+
+export default Application;
+```
+
 ## `compose()`
 
 ## Middlewares

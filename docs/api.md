@@ -71,7 +71,10 @@ Returns a new `create` function for constructing new components.
 ### Example
 
 ```js
-import React from 'react';
+// ---------------------
+// configure.js
+// ---------------------
+
 import createIt, { merge } from 'create-it';
 
 import Container from './components/container';
@@ -88,7 +91,46 @@ const Application = create({ Incrementer /*, Button, Container */ })(application
 export default Application;
 ```
 
-## `compose()`
+## `compose(...functions: Array<Function>): Function`
+
+Returns specified functions composed version. Such as: `f(g(h())) === compose(f, g, h)()` where `f`,`g`,`h` are functions.
+
+### Arguments
+
+- `functions`: Array<Function>: Composable functions 
+
+### Returns
+
+[TODO]
+
+### Example
+
+```js
+// ---------------------
+// configure.js
+// ---------------------
+import React from 'react';
+import createIt, { concat, merge, compose } from 'create-it';
+
+import Container from './components/container';
+import Button from './components/button';
+
+import incrementer from './factories/incrementer';
+import application from './factories/application';
+
+const mergeActualComponents = merge({ Button, Container });
+const appendReactLibrary = concat(React);
+
+const create = compose(
+  appendReactLibrary,
+  mergeActualComponents 
+)(createIt()); // === appendReactLibrary(mergeActualComponents(createIt()));
+
+const Incrementer = create(/* { Button, Container }, React */)(incrementer);
+const Application = create({ Incrementer /*, Button, Container */ } /*, React*/)(application);
+
+export default Application;
+```
 
 ## Middlewares
 

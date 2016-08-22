@@ -1,1 +1,1 @@
-module.exports = require('./build/createIt.js');
+module.exports = require('./build/createIt');

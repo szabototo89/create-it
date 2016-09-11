@@ -1,5 +1,5 @@
 export default (React) => (props) => {
   return <div {...props}>
-    {props.children}  
+    {props.children} 
   </div>;
 }

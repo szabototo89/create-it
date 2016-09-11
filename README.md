@@ -6,7 +6,15 @@ Simple component creation library helps to apply pure DI in your projects. Desig
 
 ## create-it <3 React.js
 
-It has been designed to support React.js totally, but because its structure it can be applied to any JavaScript application. Instead of creating actual components why don't we create component factories? Consider components as volatile dependencies in your React components and apply DI patterns with full support! 
+It has been designed to support React.js totally, but because its structure it can be applied to any JavaScript application. Instead of creating actual components why don't we create component factories? Consider components as volatile dependencies in your React components and apply DI patterns with full support!
+
+## Installation
+
+To install the stable version: 
+
+```bash
+npm install create-it
+``` 
 
 ## Examples
 

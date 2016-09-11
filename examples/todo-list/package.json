@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "create-it": "^0.1.7",
     "react-scripts": "0.2.3"
   },
   "dependencies": {

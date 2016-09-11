@@ -1,10 +1,13 @@
-export default ({ ListContainer }, React) => {
-  const TodoListItem = ({ item }) => {
+export default ({ Container }, React) => {
+  const TodoListItem = ({ item, onToggleItem }) => {
     const { isDone, value } = item;
+    const onToggle = (value) => () => {
+      return onToggleItem && onToggleItem(value);
+    };
 
-    return <ListContainer>
+    return <Container className="todo-list-item" onClick={onToggle(!isDone)}>
       {value} {isDone && <span>(Done)</span>}
-    </ListContainer>;
+    </Container>;
   };
 
   return TodoListItem;

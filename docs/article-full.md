@@ -85,8 +85,6 @@ const app = ({ Container, MyForm }) => ({ value }) => {
 export default app;
 ```
 
-
-
 ```js
 // composition-root.js
 
@@ -150,9 +148,7 @@ const myForm = ({ Container, Label, DateTimePicker }) => React.createClass({
 
 Component factories are coming to help us when we want a quick way to change component implementations, but how they fit into the React.js ecosystem? Not surprisingly we can still use React features such as prop/context types or display names, but it requires a little tooling. Several options have been provided for users and it needs to be decided which style will be used in the applications.
 
-### Classical way
-
-Classical or traditional way is to use prop types in the original form. For instance myForm is defined such like this:
+The most straightforward way is to use prop types in the original form. For instance `myForm` is defined such like this:
 
 ```js
 const myForm = ({ Container, Label, DateTimePicker }) => {
@@ -193,10 +189,6 @@ export default ({ Container, Label, DateTimePicker }) => {
 ```
 
 **Note**: By using static properties (`static propTypes = {...}`) in the classes we could return a class expression too.
-
-### Functional way
-
-[TODO: propTypes, displayName]
 
 ### Classical or functional?
 
@@ -276,12 +268,6 @@ const MyForm = createWithActualComponents({ DateTimePicker: SuperiorDateTimePick
 
 ## Component factories vs. Higher-order components
 
-You might have realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use anything else. That explains the similarity between them.  
-
-## Middlewares
-
-[TODO]
-
-JavaScript implements classes as functions and we can easily define class expressions in the code if it's necessary. 
+You might have realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use something else (such as classes). That explains the similarity between them.  
 
 In the next article I'll take further this Component Factory concept and show how powerful it can be with middleware patterns. 

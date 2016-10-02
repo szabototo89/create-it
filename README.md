@@ -1,6 +1,6 @@
 # create-it library
 
-Simple component creation library helps to apply pure DI in your projects. Designed for React.js.
+Simple component creation library helps to apply pure DI in your projects. Designed for React.js. Contributors are welcomed!
 
 [![Build Status](https://travis-ci.org/szabototo89/create-it.svg?branch=master)](https://travis-ci.org/szabototo89/create-it)
 

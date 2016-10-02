@@ -190,10 +190,6 @@ export default ({ Container, Label, DateTimePicker }) => {
 
 **Note**: By using static properties (`static propTypes = {...}`) in the classes we could return a class expression too.
 
-### Classical or functional?
-
-Well... it depends on your coding style. Classical way is easier, it doesn't require more learning or 3rd party library support (if you don't want to reinvent the wheel), meanwhile functional way fits perfectly into the functional programming and reduces(?) the boilerplate code. At first I'd stay with classical and if code starts to stink then just switch to functional. 
-
 ### Higher-order components (such as `connect()` in React-Redux)
 
 Higher-order components are not different from actual components they can be wrapped into another factory anytime. The most commonly used HOC is `connect()` function in React-Redux library. When creating a container with `connect` function we can wrap it into this form:
@@ -269,5 +265,3 @@ const MyForm = createWithActualComponents({ DateTimePicker: SuperiorDateTimePick
 ## Component factories vs. Higher-order components
 
 You might have realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use something else (such as classes). That explains the similarity between them.  
-
-In the next article I'll take further this Component Factory concept and show how powerful it can be with middleware patterns. 

@@ -1,7 +1,11 @@
 Component Factories in React.js
 ===============================
 
-I've been thinking about for a long time how the dependencies could be manageable efficiently and why don't we consider components as volatile dependencies? After a little experimenting managed to get along with **Component Factories** which fits perfectly into the React ecosystem. 
+I've been thinking about for a long time how the dependencies could be manageable efficiently and why don't we consider components as volatile dependencies? After a little experimenting managed to get along with **Component Factories** which fits perfectly into the React ecosystem.
+
+## Example (Increment Counter)
+
+Check this example: [https://github.com/szabototo89/create-it/tree/master/examples/increment-counter](https://github.com/szabototo89/create-it/tree/master/examples/increment-counter). Increment Counter uses HTML DOM and WebGL for rendering its components. You can easily switch between them just import `dom.config.js` or `webgl.config.js` in `index.js` and check its result.  
 
 ## Problem
 
@@ -265,3 +269,6 @@ const MyForm = createWithActualComponents({ DateTimePicker: SuperiorDateTimePick
 ## Component factories vs. Higher-order components
 
 You might have realized that **Component Factories** are very similar to **Higher-order Components**. So what is the difference? **Component Factories** could be considered to construct an actual component meanwhile **Higher-order Components** enhances them. Component Factories use HOC pattern to do their job, but there is no reason to use something else (such as classes). That explains the similarity between them.  
+
+
+
